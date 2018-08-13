@@ -10,7 +10,8 @@ const StyledHeader = styled(Header)``;
 const StyledFooter = styled(Footer)``;
 
 const Wrapper = styled.div`
-  border: 1px solid red;
+  min-height: 100vh;
+  background: ${colors.fair};
 `;
 injectGlobal`
   @font-face {
@@ -19,7 +20,6 @@ injectGlobal`
   }
   html, body {
     margin: 0px; padding: 0px;
-    color: ${colors.fair};
     font-family: hyeon;
   }
   img {
@@ -29,6 +29,7 @@ injectGlobal`
   * {
     box-sizing: border-box;
     transition: 0.15s ease;
+    color: ${colors.dark};
   }
 `;
 
