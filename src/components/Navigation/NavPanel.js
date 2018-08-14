@@ -7,12 +7,14 @@ import paths from './../../constants/paths';
 const StyledLink = styled(Link)`
     text-decoration: none;
     text-decoration: uppercase;
-    font-size: 1.4em;
+    font-size: 1em;
     padding: 6px 30px;
-    border: 2px solid ${colors.lessfair};
+    color: ${colors.fair};
+    background: ${colors.special};
+    border-left: 2px solid ${colors.fairspecial};
+    border-right: 3px solid ${colors.darkspecial};
     &:hover{
-        border: 2px solid ${colors.special};
-        color: ${colors.special};
+        background: ${colors.darkspecial}
     }
   }
 `;

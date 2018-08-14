@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import colors from './../../constants/colors';
 
 import Navigation from './../Navigation/Navigation';
 
 const Wrapper = styled.header`
-    background: ${colors.fair};
+    border-radius: 15px;
     text-align: center;
 `;
 

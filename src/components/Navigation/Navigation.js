@@ -4,14 +4,19 @@ import colors from './../../constants/colors';
 
 import NavPanel from './NavPanel';
 
-const Left =  styled.div``;
-const Right = styled.div``;
+const Left =  styled.div`
+    justify-content: flex-start;
+`;
+const Right = styled.div`
+    justify-content: flex-end;
+`;
 const Wrapper = styled.nav`
     display: flex;
     flex-direction: row;
-    background: ${colors.lessfair};
     ${Left}, ${Right} {
         flex: 0 0 50%;
+        display: flex;
+        align-items: center;
     }
 `;
 
