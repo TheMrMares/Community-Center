@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import styled, { injectGlobal} from 'styled-components';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import colors from './../../constants/colors';
-import HyeonURL from './../../fonts/DoHyeon-Regular.ttf';
-import RobotoURL from './../../fonts/Roboto-Regular.ttf';
 import BannerURL from './../../images/banner-bckg-blur.jpg'
 import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
+import Login from './../Login/Login';
 
 const StyledHeader = styled(Header)``;
 const StyledFooter = styled(Footer)``;
 const ComponentsArea = styled.section`
-  margin-top: 15px;
-  border-radius: 15px;
+  margin-top: 10px;
   background: ${colors.fair};
   padding: 10px;
+  border-left: 2px solid ${colors.lessfair};
+  border-right: 3px solid ${colors.verylessfair};
 `;
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -22,49 +23,31 @@ const Wrapper = styled.div`
   background-attachment: fixed;
   padding: 15px;
 `;
-injectGlobal`
-  @font-face {
-    font-family: hyeon;
-    src: url(${HyeonURL});
-  }
-  @font-face {
-    font-family: roboto;
-    src: url(${RobotoURL});
-  }
-  html, body {
-    margin: 0px; padding: 0px;
-    font-family: roboto;
-    width: 100%;
-    height: 100%;
-  }
-  img {
-    position: relative;
-    max-width: 100%;
-  }
-  * {
-    box-sizing: border-box;
-    transition: 0.15s ease;
-    color: ${colors.dark};
-  }
-  h1,h2,h3,h4,h5,h6 {
-    margin: 5px;
-    padding: 0px;
-  }
-  a,h1,h2,h3,h4,h5,h6 {
-    font-family: hyeon !important;
-  }
-`;
+
+const ProtectedRoute = ({component: Component, authenticated, ...rest}) => {
+  return(
+    <Route {...rest} render={(props) => {
+      if(authenticated !== null) {
+        return <Component {...props} {...rest} />
+      } else {
+        return <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+      }
+    }}/>
+  );
+};
 
 class App extends Component {
   render() {
     return (
-      <Wrapper className={this.props.className}>
+      <Router>
+        <Wrapper className={this.props.className}>
           <StyledHeader/>
             <ComponentsArea>
-              ass
+              <Route exact path='/login' component={Login}/>
             </ComponentsArea>
           <StyledFooter/>
-      </Wrapper>
+        </Wrapper>
+      </Router>
     );
   }
 }

@@ -7,14 +7,15 @@ import paths from './../../constants/paths';
 import ServiceMap from './ServiceMap';
 const StyledServiceMap = styled(ServiceMap)``;
 const Wrapper = styled.footer`
-    margin-top: 15px;
-    border-radius: 15px;
-    padding: 20px 0px;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    border-left: 3px solid ${colors.verylessfair};
+    border-right: 2px solid ${colors.lessfair};
+    background: ${colors.fair};
     h2 {
         font-weight: normal;
         font-size: 1.4em;

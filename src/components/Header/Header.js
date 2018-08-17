@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Navigation from './../Navigation/Navigation';
 
 const Wrapper = styled.header`
-    border-radius: 15px;
     text-align: center;
 `;
 

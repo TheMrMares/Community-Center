@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 import paths from './../../constants/paths';
+import uuidv4 from 'uuidv4';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
     text-decoration: uppercase;
     font-size: 1em;
     padding: 6px 30px;
-    color: ${colors.fair};
+    color: ${colors.fair} !important;
     background: ${colors.special};
     border-left: 2px solid ${colors.fairspecial};
     border-right: 3px solid ${colors.darkspecial};
@@ -30,7 +31,7 @@ const Wrapper = styled.ul`
 class NavPanel extends Component {
     renderItem(name, path){
         return(
-            <Item>
+            <Item key={uuidv4()}>
                 <StyledLink to={path}>{name}</StyledLink>
             </Item>
         );

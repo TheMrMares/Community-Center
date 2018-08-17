@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 import paths from './../../constants/paths';
+import uuidv4 from 'uuidv4';
+
 const StyledLink = styled(Link)`
     padding: 5px 20px;
     color: ${colors.dark};
@@ -28,14 +30,12 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: ${colors.fair};
-    border-radius: 15px;
 `;
 
 class ServiceMap extends Component {
     renderItem(name, path){
         return(
-            <Item>
+            <Item key={uuidv4()}>
                 <StyledLink to={path}>{name}</StyledLink>
             </Item>
         );

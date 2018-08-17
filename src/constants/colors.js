@@ -5,8 +5,10 @@ const colors = {
     dark: '#111',
     verydark: '#000',
     smoothdar: '#333',
+    smoothfair: '#fafafa',
     fair: '#fff',
-    lessfair: '#fafafa',
+    lessfair: '#eee',
+    verylessfair: '#ddd',
     vel: 'rgba(0,0,0,0.2)'
 }
 
