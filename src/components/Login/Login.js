@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
+import {auth} from './../../firebase/index';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -59,21 +60,67 @@ const Wrapper = styled.div`
 `;
 
 class Login extends Component {
+    constructor(){
+        super();
+        this.state = {
+            emailVal: '',
+            passwordVal: '',
+            redirect: null
+        }
+    }
     submitLogin(evt){
         evt.preventDefault();
         evt.stopPropagation();
         
-        console.log('submit login');
+        auth.signInWithEmailAndPassword(this.state.emailVal, this.state.passwordVal).then(() => {
+            this.setState({
+                redirect: '/register'
+            })
+        }).catch(error => {
+            console.log(`#ERROR Code: ${error.code} Message: ${error.message}`);
+        });
+    }
+    handleChange(evt){
+        switch(evt.target.id){
+            case 'loginEmail':
+                this.setState({
+                    emailVal: evt.target.value
+                })
+            break;
+            case 'loginPassword':
+                this.setState({
+                    passwordVal: evt.target.value
+                })
+            break;
+        }
+    }
+    letsRedirect(){
+        if(this.state.redirect !== null){
+            return <Redirect to={this.state.redirect}/>
+        }
     }
     render(){
         return(
             <Wrapper className={this.props.className}>
                 <Holder>
+                    {this.letsRedirect()}
                     <Title>Login</Title>
                     <Label>E-mail</Label>
-                    <Field type='email' placeholder='E-mail'/>
+                    <Field 
+                        id='loginEmail'
+                        type='email' 
+                        placeholder='E-mail'
+                        value={this.state.emailVal}
+                        onChange={this.handleChange.bind(this)}
+                    />
                     <Label>Password</Label>
-                    <Field type='password' placeholder='Password'/>
+                    <Field 
+                        id='loginPassword'
+                        type='password' 
+                        placeholder='Password'
+                        value={this.state.passwordVal}
+                        onChange={this.handleChange.bind(this)}
+                    />
                     <Hint>
                     Haven't got account?<StyledLink to='/register'> <br/>Create one.</StyledLink>
                     </Hint>
