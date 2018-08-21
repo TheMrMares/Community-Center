@@ -5,6 +5,9 @@ import colors from './../../constants/colors';
 import paths from './../../constants/paths';
 import uuidv4 from 'uuidv4';
 
+const Title = styled.h2`
+    font-size: 0.8em;
+`;
 const StyledLink = styled(Link)`
     padding: 5px 20px;
     color: ${colors.dark};
@@ -18,6 +21,7 @@ const StyledLink = styled(Link)`
 const Item = styled.li`
     display: flex;
     margin: 5px 0px;
+    font-size: 0.9em;
 `;
 const Map = styled.ul`
     margin: 0px;
@@ -43,7 +47,7 @@ class ServiceMap extends Component {
     render(){
         return(
             <Wrapper className={this.props.className}>
-                <h2>Service map</h2>
+                <Title>Service map</Title>
                 <Map>
                     {paths.map((item, index) => {
                         return this.renderItem(item.name, item.path)

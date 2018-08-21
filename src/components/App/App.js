@@ -6,6 +6,7 @@ import BannerURL from './../../images/banner-bckg-blur.jpg'
 import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
 import Login from './../Login/Login';
+import Register from './../Register/Register';
 
 const StyledHeader = styled(Header)``;
 const StyledFooter = styled(Footer)``;
@@ -44,6 +45,7 @@ class App extends Component {
           <StyledHeader/>
             <ComponentsArea>
               <Route exact path='/login' component={Login}/>
+              <Route exact path='/register' component={Register}/>
             </ComponentsArea>
           <StyledFooter/>
         </Wrapper>

@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 
 import NavPanel from './NavPanel';
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    cursor: pointer;
+        &:hover{
+            color: ${colors.special};
+        }
+`;
 const Hint = styled.div`
 `;
 const Left =  styled.div`
@@ -20,21 +28,9 @@ const Wrapper = styled.nav`
         display: flex;
         align-items: center;
     }
-    a {
-        cursor: pointer;
-        &:hover{
-            color: ${colors.special};
-        }
-    }
 `;
 
 class Navigation extends Component {
-    handleRegister(){
-        console.log('show register')
-    }
-    handleLogin(){
-        console.log('show login')
-    }
     render(){
         return(
             <Wrapper>
@@ -43,7 +39,7 @@ class Navigation extends Component {
                 </Left>
                 <Right>
                     <Hint>
-                        <a onClick={this.handleLogin.bind(this)}>Login</a> Haven't got account? <a onClick={this.handleRegister.bind(this)}>Create</a>
+                        <StyledLink to='/login'>Login</StyledLink> Haven't got account? <StyledLink to='/register'>Create</StyledLink>
                     </Hint>
                 </Right>
             </Wrapper>

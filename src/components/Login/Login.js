@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    cursor: pointer;
+        &:hover{
+            color: ${colors.special};
+        }
+`;
 const Submit = styled.input.attrs({
     type: 'submit',
     value: 'Sign In'
@@ -9,26 +17,34 @@ const Submit = styled.input.attrs({
     display: block;
     margin: 10px auto;
     outline: none;
+    &:hover {
+        background: ${colors.darkspecial};
+    }
 `;
-
+const Hint = styled.div`
+    padding: 5px;
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 10px;
+`;
 const Title = styled.h1`
     font-size: 1.2em;
-    flex: 0 0 100%;
     text-align: center;
 `;
 const Label = styled.h2`
     font-size: 0.9em;
-    flex: 0 0 50%;
     border-left: 3px solid ${colors.special};
     padding-left: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
 `;
 const Field = styled.input`
-    flex: 0 0 50%;
+    margin: auto;
+    left: 0; right: 0;
 `;
 const Holder = styled.div`
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
     padding: 15px;
     background: ${colors.smoothfair};
     border-radius: 2px;
@@ -47,7 +63,7 @@ class Login extends Component {
         evt.preventDefault();
         evt.stopPropagation();
         
-        console.log('xd');
+        console.log('submit login');
     }
     render(){
         return(
@@ -55,9 +71,12 @@ class Login extends Component {
                 <Holder>
                     <Title>Login</Title>
                     <Label>E-mail</Label>
-                    <Field type="email"/>
+                    <Field type='email' placeholder='E-mail'/>
                     <Label>Password</Label>
-                    <Field type="password"/>
+                    <Field type='password' placeholder='Password'/>
+                    <Hint>
+                    Haven't got account?<StyledLink to='/register'> <br/>Create one.</StyledLink>
+                    </Hint>
                     <Submit onClick={this.submitLogin.bind(this)}/>
                 </Holder>
             </Wrapper>
