@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import colors from './../../constants/colors';
+import {auth} from './../../firebase/index';
 import BannerURL from './../../images/banner-bckg-blur.jpg'
 import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
 import Login from './../Login/Login';
 import Register from './../Register/Register';
+import Home from './../Home/Home';
+import NotificationManager from './../Notifications/NotificationManager';
 
 const StyledHeader = styled(Header)``;
 const StyledFooter = styled(Footer)``;
@@ -25,7 +28,7 @@ const Wrapper = styled.div`
   padding: 15px;
 `;
 
-const ProtectedRoute = ({component: Component, authenticated, ...rest}) => {
+const ProtectedRoute = ({component: Component, authenticated = auth.currentUser, ...rest} = {}) => {
   return(
     <Route {...rest} render={(props) => {
       if(authenticated !== null) {
@@ -46,8 +49,10 @@ class App extends Component {
             <ComponentsArea>
               <Route exact path='/login' component={Login}/>
               <Route exact path='/register' component={Register}/>
+              <ProtectedRoute exact path='/home' component={Home}/>
             </ComponentsArea>
           <StyledFooter/>
+          <NotificationManager/>
         </Wrapper>
       </Router>
     );

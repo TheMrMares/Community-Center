@@ -5,7 +5,9 @@ class userPath {
     }
 }
 const paths = [
-    new userPath('Home', '/'),new userPath('Home', '/'),new userPath('Home', '/'),new userPath('Home', '/')
+    new userPath('Home', '/home'),
+    new userPath('Login', '/login'),
+    new userPath('Register', '/register')
 ]
 
 export default paths;
