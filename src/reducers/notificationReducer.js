@@ -14,13 +14,11 @@ const notificationReducer = (state = initialState, action) => {
 
             return [...state, action.payload]
         case DELETE_NOTIFICATION:
-            let arr = state;
-            arr.forEach((item , index) => {
-                if(item.noteID === action.payload){
-                    arr.splice(index, 1);
-                }
+            
+            const newArr = state.filter((item, index) => {
+                return (item.noteID === action.payload)
             });
-            return arr;
+            return newArr;
         default:
             return state;
     }

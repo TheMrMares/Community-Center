@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 import { connect } from 'react-redux';
-import {AddNotification} from './../../actions/index';
+import {AddNotification, DeleteNotification} from './../../actions/index';
 import uudiv4 from 'uuidv4';
+import Notification from './Notification';
 
 const Wrapper = styled.div`
     position: fixed;
@@ -25,9 +26,15 @@ class NotificationManager extends Component {
     render(){
         return(
             <Wrapper className={this.props.className}>
-                {console.log(this.props.notifications)}
-                NotificationManager
                 <button onClick={this.addNotification.bind(this)}>Add</button>
+                {this.props.notifications.map((item, index) => {
+                    return <Notification 
+                        title={item.title} 
+                        text={item.text} 
+                        noteID={item.noteID} 
+                        key={uudiv4()}
+                    />
+                })}
             </Wrapper>
         );
     }
@@ -40,7 +47,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-      addNote: payload => dispatch(AddNotification(payload))
+      addNote: payload => dispatch(AddNotification(payload)),
+      deleteNote: payload => dispatch(DeleteNotification(payload))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationManager);
