@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import colors from './../../constants/colors';
 import paths from './../../constants/paths';
 import uuidv4 from 'uuidv4';
+import {auth} from './../../firebase/index';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -40,7 +41,16 @@ class NavPanel extends Component {
         return(
             <Wrapper>
                 {paths.map((item, index) => {
-                    return this.renderItem(item.name, item.path)
+                    switch(item.mode){
+                        case 0:
+                            return this.renderItem(item.name, item.path);
+                        case 1:
+                            return !auth.currentUser && this.renderItem(item.name, item.path);
+                        case 2:
+                            return auth.currentUser && this.renderItem(item.name, item.path);
+                        default:
+                            return;
+                    }
                 })}
             </Wrapper>
         );

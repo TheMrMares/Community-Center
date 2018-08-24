@@ -77,7 +77,7 @@ class Login extends Component {
         
         auth.signInWithEmailAndPassword(this.state.emailVal, this.state.passwordVal).then(() => {
             this.setState({
-                redirect: '/register'
+                redirect: '/home'
             })
         }).catch(error => {
             console.log(`#ERROR Code: ${error.code} Message: ${error.message}`);
