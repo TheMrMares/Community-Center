@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {AddNotification} from './../../actions/index';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 import {auth} from './../../firebase/index';
+import uudiv4 from 'uuidv4';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -78,6 +81,12 @@ class Login extends Component {
             })
         }).catch(error => {
             console.log(`#ERROR Code: ${error.code} Message: ${error.message}`);
+            this.props.addNote({
+                title: error.code,
+                text: error.message,
+                noteID: uudiv4(),
+                livetime: 10000
+            });
         });
     }
     handleChange(evt){
@@ -130,5 +139,10 @@ class Login extends Component {
         );
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        addNote: payload => dispatch(AddNotification(payload))
+    };
+  };
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);

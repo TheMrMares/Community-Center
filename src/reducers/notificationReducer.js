@@ -14,9 +14,9 @@ const notificationReducer = (state = initialState, action) => {
 
             return [...state, action.payload]
         case DELETE_NOTIFICATION:
-            
-            const newArr = state.filter((item, index) => {
-                return (item.noteID === action.payload)
+            let newArr = state;
+            newArr = newArr.filter((item, index) => {
+                return (item.noteID !== action.payload)
             });
             return newArr;
         default:

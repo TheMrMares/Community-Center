@@ -3,6 +3,9 @@ import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 import {auth, firestore} from './../../firebase/index';
+import uudiv4 from 'uuidv4';
+import {connect} from 'react-redux';
+import {AddNotification} from './../../actions/index';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -131,7 +134,7 @@ class Register extends Component {
         const sameEmails = (this.state.emailVal === this.state.emailRepeatVal);
         const samePasswords = (this.state.passwordVal === this.state.passwordRepeatVal);
         const filledEmail = (this.state.emailVal.length !== 0);
-        const longPassword = (this.state.passwordVal.length >= 6);
+        const longPassword = (this.state.passwordVal.length >= 6 && this.this.state.passwordVal.length <= 24);
         const validEmail = (reg.test(this.state.emailVal));
         const everyCond = (sameEmails && samePasswords && filledEmail && longPassword && validEmail);
 
@@ -148,13 +151,56 @@ class Register extends Component {
                     })
                 }).catch(error => {
                     console.log(`#ERROR Code: ${error.code} Message: ${error.message}`);
+                    this.props.addNote({
+                        title: error.code,
+                        text: error.message,
+                        noteID: uudiv4(),
+                        livetime: 10000
+                    });
                 });
 
             }).catch(error => {
                 console.log(`#ERROR Code: ${error.code} Message: ${error.message}`);
+                this.props.addNote({
+                    title: error.code,
+                    text: error.message,
+                    noteID: uudiv4(),
+                    livetime: 10000
+                });
             });
         } else {
-            
+            const errorDuration = 10000;
+
+            !sameEmails && this.props.addNote({
+                title: 'Diffrent emails',
+                text: `Email adresses which you have used are diffrent.`,
+                noteID: uudiv4(),
+                livetime: errorDuration
+            });
+            !samePasswords && this.props.addNote({
+                title: 'Diffrent passwords',
+                text: `Passwords which you have used are diffrent.`,
+                noteID: uudiv4(),
+                livetime: errorDuration
+            });
+            !filledEmail && this.props.addNote({
+                title: 'Empty email',
+                text: `You have to set your email`,
+                noteID: uudiv4(),
+                livetime: errorDuration
+            });
+            !longPassword && this.props.addNote({
+                title: 'Invalid password length',
+                text: `Account password have to be between 6-24 characters long.`,
+                noteID: uudiv4(),
+                livetime: errorDuration
+            });
+            !validEmail && this.props.addNote({
+                title: 'Invalid email',
+                text: `Email which you have typed is not a valid email.`,
+                noteID: uudiv4(),
+                livetime: errorDuration
+            });
         }
     }
     letsRedirect(){
@@ -240,4 +286,10 @@ class Register extends Component {
     }
 }
 
-export default Register;
+const mapDispatchToProps = dispatch => {
+    return {
+        addNote: payload => dispatch(AddNotification(payload))
+    };
+  };
+
+export default connect(null, mapDispatchToProps)(Register);
