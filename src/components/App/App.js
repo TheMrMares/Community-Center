@@ -10,6 +10,7 @@ import Login from './../Login/Login';
 import Register from './../Register/Register';
 import Home from './../Home/Home';
 import NotificationManager from './../Notifications/NotificationManager';
+import Forum from './../Forum/Forum';
 
 const StyledHeader = styled(Header)``;
 const StyledFooter = styled(Footer)``;
@@ -50,6 +51,7 @@ class App extends Component {
               <Route exact path='/login' component={Login}/>
               <Route exact path='/register' component={Register}/>
               <ProtectedRoute exact path='/home' component={Home}/>
+              <Route exact path='/forum' component={Forum}/>
             </ComponentsArea>
           <StyledFooter/>
           <NotificationManager/>

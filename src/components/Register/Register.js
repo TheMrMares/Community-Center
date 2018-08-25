@@ -56,7 +56,7 @@ const Top = styled.div`
 const Bottom = styled.div`
 
 `;
-const Holder = styled.div`
+const Holder = styled.form`
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -134,7 +134,7 @@ class Register extends Component {
         const sameEmails = (this.state.emailVal === this.state.emailRepeatVal);
         const samePasswords = (this.state.passwordVal === this.state.passwordRepeatVal);
         const filledEmail = (this.state.emailVal.length !== 0);
-        const longPassword = (this.state.passwordVal.length >= 6 && this.this.state.passwordVal.length <= 24);
+        const longPassword = (this.state.passwordVal.length >= 6 && this.state.passwordVal.length <= 24);
         const validEmail = (reg.test(this.state.emailVal));
         const everyCond = (sameEmails && samePasswords && filledEmail && longPassword && validEmail);
 
@@ -142,15 +142,26 @@ class Register extends Component {
             auth.createUserAndRetrieveDataWithEmailAndPassword(this.state.emailVal, this.state.passwordVal).then((data) => {
                 
                 firestore.collection('users').doc(data.user.uid).set({
-                    displayname: this.state.displaynameVal,
                     firstname: this.state.firstnameVal,
-                    surname: this.state.surnameVal
+                    surname: this.state.surnameVal,
                 }).then(() => {
-                    this.setState({
-                        redirect: '/login'
-                    })
+                    auth.currentUser.updateProfile({
+                        displayName: this.state.displaynameVal,
+                        photoURL: ''
+                      }).then(() => {
+                        this.setState({
+                            redirect: '/login'
+                        })
+                      }).catch((error) => {
+                        this.props.addNote({
+                            title: error.code,
+                            text: error.message,
+                            noteID: uudiv4(),
+                            livetime: 10000
+                        });
+                      });
+                    
                 }).catch(error => {
-                    console.log(`#ERROR Code: ${error.code} Message: ${error.message}`);
                     this.props.addNote({
                         title: error.code,
                         text: error.message,
@@ -160,7 +171,6 @@ class Register extends Component {
                 });
 
             }).catch(error => {
-                console.log(`#ERROR Code: ${error.code} Message: ${error.message}`);
                 this.props.addNote({
                     title: error.code,
                     text: error.message,

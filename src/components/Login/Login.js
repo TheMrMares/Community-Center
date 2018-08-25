@@ -46,7 +46,7 @@ const Field = styled.input`
     margin: auto;
     left: 0; right: 0;
 `;
-const Holder = styled.div`
+const Holder = styled.form`
     display: flex;
     flex-direction: column;
     padding: 15px;
