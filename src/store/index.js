@@ -1,9 +1,15 @@
-import { createStore } from 'redux';
-import rootReducer from './../reducers/index';
+import { init } from "@rematch/core";
+import notifications from './../models/notifications';
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = init({
+  models: {
+    notifications,
+  },
+  redux: {
+    reducers: {
+      //redux stadnard reducer
+    }
+  },
+});
 
 export default store;

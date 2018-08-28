@@ -35,7 +35,6 @@ const Wrapper = styled.div`
 
 class Notification extends Component {
     render(){
-        console.log('render');
         return(
             <Wrapper className={this.props.className}>
                 <Title>{this.props.title}</Title>

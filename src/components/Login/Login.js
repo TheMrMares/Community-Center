@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {AddNotification} from './../../actions/index';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 import {auth} from './../../firebase/index';
@@ -141,7 +140,7 @@ class Login extends Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addNote: payload => dispatch(AddNotification(payload))
+        addNote: payload => dispatch.notifications.ADD_NOTIFICATION(payload)
     };
   };
 

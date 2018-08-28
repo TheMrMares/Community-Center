@@ -5,7 +5,6 @@ import colors from './../../constants/colors';
 import {auth, firestore} from './../../firebase/index';
 import uudiv4 from 'uuidv4';
 import {connect} from 'react-redux';
-import {AddNotification} from './../../actions/index';
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -298,7 +297,7 @@ class Register extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addNote: payload => dispatch(AddNotification(payload))
+        addNote: payload => dispatch.notifications.ADD_NOTIFICATION(payload)
     };
   };
 

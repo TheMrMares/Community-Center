@@ -51,7 +51,7 @@ class App extends Component {
               <Route exact path='/login' component={Login}/>
               <Route exact path='/register' component={Register}/>
               <ProtectedRoute exact path='/home' component={Home}/>
-              <Route exact path='/forum' component={Forum}/>
+              <ProtectedRoute exact path='/forum' component={Forum}/>
             </ComponentsArea>
           <StyledFooter/>
           <NotificationManager/>
