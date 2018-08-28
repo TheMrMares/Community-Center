@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import store from './../store/index';
 
 let config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -20,3 +21,11 @@ auth.useDeviceLanguage();
 firestore.settings({
   timestampsInSnapshots: true
 });
+
+auth.onAuthStateChanged((data) => {
+  if(auth.currentUser){
+    store.dispatch.auths.SIGN_IN(data);
+  } else {
+    store.dispatch.auths.SIGN_OUT(data);
+  }
+})
