@@ -299,6 +299,6 @@ const mapDispatchToProps = dispatch => {
     return {
         addNote: payload => dispatch.notifications.ADD_NOTIFICATION(payload)
     };
-  };
+};
 
 export default connect(null, mapDispatchToProps)(Register);
