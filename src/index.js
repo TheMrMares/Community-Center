@@ -34,6 +34,7 @@ injectGlobal`
     transition: 0.15s ease;
     color: ${colors.dark};
     border-radius: 2px;
+    font-family: roboto;
   }
   h1,h2,h3,h4,h5,h6 {
     margin: 5px;

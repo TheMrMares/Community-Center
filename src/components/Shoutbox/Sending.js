@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
-import {firestore} from './../../firebase/index';
+import {firestore, auth} from './../../firebase/index';
 import firebase from 'firebase/app'
 import {connect} from 'react-redux';
 import uudiv4 from 'uuidv4';
@@ -23,8 +23,9 @@ const Wrapper = styled.form`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    ${Field}, ${Send} {
-        margin: 0px 20px;
+    margin-top: 10px;
+    ${Send}, ${Field} {
+        margin: 10px;
     }
 `;
 
@@ -43,9 +44,10 @@ class Sending extends Component {
     handleSubmit(evt){
         evt.preventDefault();
         evt.stopPropagation();
-
         firestore.collection('shouts').add({
             authorUid: this.props.auths.user.uid,
+            authorUrl: auth.currentUser.photoURL,
+            authorDisplayname: auth.currentUser.displayName,
             created: firebase.firestore.FieldValue.serverTimestamp(),
             text: this.state.message
         }).then(() => {
@@ -67,7 +69,7 @@ class Sending extends Component {
         return(
             <Wrapper className={this.props.className}>
                 <Field value={this.state.message} onChange={this.handleChange.bind(this)}/>
-                <input type='submit' value='Send' onClick={this.handleSubmit.bind(this)}/>
+                <Send onClick={this.handleSubmit.bind(this)}/>
             </Wrapper>
         );
     }

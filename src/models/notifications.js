@@ -5,8 +5,6 @@ export default {
     reducers: {
       ADD_NOTIFICATION: (state, payload) => {
 
-        console.log(payload);
-
         window.setTimeout(() => {
             store.dispatch.notifications.DELETE_NOTIFICATION(payload.noteID);
         },payload.livetime);
