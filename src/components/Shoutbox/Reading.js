@@ -21,7 +21,7 @@ class Reading extends Component {
             <Wrapper className={this.props.className}>
                 {this.props.shouts.map((item, index) => {
                     if(item){
-                        let imageUrl = (item.data().authorUrl && item.data().authorUrl || 'error');
+                        let imageUrl = (item.data().authorUrl && (item.data().authorUrl || 'error'));
                         return(
                             <Shout
                                 key={uuidv4()}

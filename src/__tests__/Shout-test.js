@@ -1,7 +1,13 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import Shout from './../components/Shoutbox/Shout';
 
-it('renders without crashing', () => {
-  const wrapper = shallow(<Shout text='example text' url='some url' displayname='some displayname' />);
-});
+import Sending from './../components/Shoutbox/Shout';
+
+  it('renders SENDING without crashing', () => {
+    shallow(<Sending/>);
+  })
+  it('SENDING has 2 inputs', () => {
+    const wrapper = shallow(<Sending/>);
+    expect(wrapper.find('input').length).toBe(2);
+  })
+})

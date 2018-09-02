@@ -81,6 +81,7 @@ class Sending extends Component {
             <Wrapper className={this.props.className}>
                 <Field value={this.state.message} onChange={this.handleChange.bind(this)}/>
                 <Send onClick={this.handleSubmit.bind(this)}/>
+                <input/>
             </Wrapper>
         );
     }
