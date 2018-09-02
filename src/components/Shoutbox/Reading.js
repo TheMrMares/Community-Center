@@ -19,17 +19,18 @@ class Reading extends Component {
         return(
             <Wrapper className={this.props.className}>
                 {this.props.shouts.map((item, index) => {
-                    console.log(item.data());
-                    let imageUrl = (item.data().authorUrl && item.data().authorUrl || 'error');
-                    return(
-                        <Shout
-                            key={uuidv4()}
-                            text={item.data().text}
-                            uid={item.data().authorUid}
-                            displayname={item.data().authorDisplayname}
-                            url={imageUrl}
-                        />
-                    );
+                    if(item){
+                        let imageUrl = (item.data().authorUrl && item.data().authorUrl || 'error');
+                        return(
+                            <Shout
+                                key={uuidv4()}
+                                text={item.data().text}
+                                uid={item.data().authorUid}
+                                displayname={item.data().authorDisplayname}
+                                url={imageUrl}
+                            />
+                        );
+                    }
                 })}
             </Wrapper>
         );

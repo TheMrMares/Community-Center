@@ -5,7 +5,6 @@ import {firestore, auth} from './../../firebase/index';
 import firebase from 'firebase/app'
 import {connect} from 'react-redux';
 import uudiv4 from 'uuidv4';
-import PropTypes from 'prop-types'
 
 const Send = styled.input.attrs({
     type: 'submit',
@@ -45,13 +44,13 @@ class Sending extends Component {
     handleSubmit(evt){
         evt.preventDefault();
         evt.stopPropagation();
-        
+        const when = firebase.firestore.FieldValue.serverTimestamp();
         if(this.state.message.length > 0){
             firestore.collection('shouts').add({
                 authorUid: this.props.auths.user.uid,
                 authorUrl: auth.currentUser.photoURL,
                 authorDisplayname: auth.currentUser.displayName,
-                created: firebase.firestore.FieldValue.serverTimestamp(),
+                created: when,
                 text: this.state.message
             }).then(() => {
                 
@@ -85,11 +84,6 @@ class Sending extends Component {
             </Wrapper>
         );
     }
-}
-
-Sending.PropTypes = {
-    handleChange: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {

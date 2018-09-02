@@ -17,15 +17,20 @@ const Wrapper = styled.div`
 class Shoutbox extends Component {
     constructor(){
         super()
+        this.prime = true;
     }
     componentDidMount(){
-        firestore.collection('shouts').orderBy('created', 'desc').limit(500).onSnapshot((data) => {
+
+        firestore.collection('shouts').orderBy('created', 'desc').limit(50).onSnapshot((data) => {
             let filteredData = data.docs.filter((item) => {
                 if(item.ref.id !== 'template'){
                     return item;
                 }
             });
-            this.props.loadShouts(filteredData);
+            const timestampCond = (filteredData[0].data().created && filteredData[filteredData.length-1].data().created);
+            if(filteredData.length > 0 && timestampCond){
+                this.props.loadShouts(filteredData);
+            }
         })
     }
     render(){

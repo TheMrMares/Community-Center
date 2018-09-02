@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 import avatarThumbURL from './../../images/avatar-thumb1.1.png';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 const Text = styled.p`
     font-family: Arial !important;
@@ -68,11 +68,10 @@ class Shout extends Component {
     }
 }
 
-Shout.PropTypes = {
-    url: PropTypes.string,
-    text: PropTypes.string.isRequired,
-    displayname: PropTypes.string.isRequired,
-    replaceImage: PropTypes.func.isRequired
+Shout.propTypes = {
+    url: propTypes.string,
+    text: propTypes.string.isRequired,
+    displayname: propTypes.string.isRequired
 }
 
 export default Shout;

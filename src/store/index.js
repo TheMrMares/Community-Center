@@ -11,7 +11,7 @@ const store = init({
   },
   redux: {
     reducers: {
-      //redux stadnard reducer
+      //redux standard reducer
     }
   },
 });
