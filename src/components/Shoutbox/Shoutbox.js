@@ -5,6 +5,7 @@ import Reading from './Reading';
 import Sending from './Sending';
 import {firestore} from './../../firebase/index';
 import {connect} from 'react-redux';
+import {List} from 'immutable';
 
 const StyledReading = styled(Reading)``;
 const StyledSending = styled(Sending)``;
@@ -22,14 +23,14 @@ class Shoutbox extends Component {
     componentDidMount(){
 
         firestore.collection('shouts').orderBy('created', 'desc').limit(50).onSnapshot((data) => {
-            let filteredData = data.docs.filter((item) => {
+            let filteredData = List(data.docs).filter((item) => {
                 if(item.ref.id !== 'template'){
                     return item;
                 }
             });
-            const timestampCond = (filteredData[0].data().created && filteredData[filteredData.length-1].data().created);
-            if(filteredData.length > 0 && timestampCond){
-                this.props.loadShouts(filteredData);
+            const timestampCond = (filteredData.get(0).data().created && filteredData.get(-1).data().created);
+            if(filteredData.size > 0 && timestampCond){
+                this.props.loadShouts(filteredData.toJS());
             }
         })
     }

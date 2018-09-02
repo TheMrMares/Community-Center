@@ -4,6 +4,7 @@ import colors from './../../constants/colors';
 import {connect} from 'react-redux';
 import Shout from './Shout';
 import uuidv4 from 'uuidv4';
+import propTypes from 'prop-types';
 
 const Wrapper = styled.div`
     height: 400px;
@@ -35,6 +36,10 @@ class Reading extends Component {
             </Wrapper>
         );
     }
+}
+
+Reading.propTypes = {
+    shouts: propTypes.arrayOf(propTypes.object)
 }
 
 const mapStateToProps = state => {
