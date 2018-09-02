@@ -5,6 +5,7 @@ import {firestore, auth} from './../../firebase/index';
 import firebase from 'firebase/app'
 import {connect} from 'react-redux';
 import uudiv4 from 'uuidv4';
+import PropTypes from 'prop-types'
 
 const Send = styled.input.attrs({
     type: 'submit',
@@ -44,26 +45,37 @@ class Sending extends Component {
     handleSubmit(evt){
         evt.preventDefault();
         evt.stopPropagation();
-        firestore.collection('shouts').add({
-            authorUid: this.props.auths.user.uid,
-            authorUrl: auth.currentUser.photoURL,
-            authorDisplayname: auth.currentUser.displayName,
-            created: firebase.firestore.FieldValue.serverTimestamp(),
-            text: this.state.message
-        }).then(() => {
-            
-            this.setState({
-                message: ''
+        
+        if(this.state.message.length > 0){
+            firestore.collection('shouts').add({
+                authorUid: this.props.auths.user.uid,
+                authorUrl: auth.currentUser.photoURL,
+                authorDisplayname: auth.currentUser.displayName,
+                created: firebase.firestore.FieldValue.serverTimestamp(),
+                text: this.state.message
+            }).then(() => {
+                
+                this.setState({
+                    message: ''
+                });
+    
+            }).catch(error => {
+                this.props.addNote({
+                    title: error.code,
+                    text: error.message,
+                    noteID: uudiv4(),
+                    livetime: 10000
+                });
             });
-
-        }).catch(error => {
+        } else {
             this.props.addNote({
-                title: error.code,
-                text: error.message,
+                title: 'Shoutbox message cannot be empty',
+                text: `Shoutbox message have to be longer than 0 characters`,
                 noteID: uudiv4(),
-                livetime: 10000
+                livetime: 3000
             });
-        });
+        }
+        
     }
     render(){
         return(
@@ -73,6 +85,11 @@ class Sending extends Component {
             </Wrapper>
         );
     }
+}
+
+Sending.PropTypes = {
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {

@@ -9,6 +9,7 @@ import Footer from './../Footer/Footer';
 import Login from './../Login/Login';
 import Register from './../Register/Register';
 import Home from './../Home/Home';
+import Profile from './../Profile/Profile';
 import NotificationManager from './../Notifications/NotificationManager';
 import Forum from './../Forum/Forum';
 
@@ -52,6 +53,7 @@ class App extends Component {
               <Route exact path='/register' component={Register}/>
               <ProtectedRoute exact path='/home' component={Home}/>
               <ProtectedRoute exact path='/forum' component={Forum}/>
+              <ProtectedRoute exact path='/profile' component={Profile}/>
             </ComponentsArea>
           <StyledFooter/>
           <NotificationManager/>

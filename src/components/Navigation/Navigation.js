@@ -7,6 +7,7 @@ import {auth} from './../../firebase/index';
 import NavPanel from './NavPanel';
 
 const Logout = styled.button`
+    margin: 0px 0px 0px 10px;
     &:hover{
         background: ${colors.darkspecial};
     }
@@ -58,6 +59,7 @@ class Navigation extends Component {
         if(this.props.auths.authed){
             return(
                 <Hint>
+                    <StyledLink to='/myprofile'>{this.props.auths.user.displayName}</StyledLink>
                     <Logout onClick={this.logout.bind(this)}>Logout</Logout>
                 </Hint>
             );

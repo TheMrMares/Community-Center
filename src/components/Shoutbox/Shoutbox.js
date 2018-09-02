@@ -19,7 +19,7 @@ class Shoutbox extends Component {
         super()
     }
     componentDidMount(){
-        firestore.collection('shouts').orderBy('created', 'desc').onSnapshot((data) => {
+        firestore.collection('shouts').orderBy('created', 'desc').limit(500).onSnapshot((data) => {
             let filteredData = data.docs.filter((item) => {
                 if(item.ref.id !== 'template'){
                     return item;

@@ -16,6 +16,7 @@
   "devDependencies": {
     "@rematch/core": "^1.0.0-beta.4",
     "firebase": "^5.3.1",
+    "prop-types": "^15.6.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import colors from './../../constants/colors';
 import avatarThumbURL from './../../images/avatar-thumb1.1.png';
+import PropTypes from 'prop-types';
 
 const Text = styled.p`
     font-family: Arial !important;
@@ -21,7 +22,6 @@ const Displayname = styled.p`
     font-weight: bold;
 `;
 const Author = styled.div`
-    width: 15%;
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-start;
@@ -66,6 +66,13 @@ class Shout extends Component {
             </Wrapper>
         );
     }
+}
+
+Shout.PropTypes = {
+    url: PropTypes.string,
+    text: PropTypes.string.isRequired,
+    displayname: PropTypes.string.isRequired,
+    replaceImage: PropTypes.func.isRequired
 }
 
 export default Shout;
